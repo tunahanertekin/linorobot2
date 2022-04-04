@@ -55,12 +55,6 @@ def generate_launch_description():
         ),
 
         Node(
-            package='linorobot2_gazebo',
-            executable='command_timeout.py',
-            name='command_timeout'
-        ),
-
-        Node(
             package='robot_localization',
             executable='ekf_node',
             name='ekf_filter_node',

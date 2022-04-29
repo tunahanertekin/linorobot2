@@ -19,6 +19,8 @@ from launch.substitutions import LaunchConfiguration, Command, PathJoinSubstitut
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+from ament_index_python.packages import get_package_share_directory
+
 
 
 def generate_launch_description():
@@ -36,13 +38,17 @@ def generate_launch_description():
         [FindPackageShare("linorobot2_gazebo"), "worlds", "playground.world"]
     )
 
+    world_file_name = 'turtlebot3_autoraces/normal.model'
+    world_path2 = os.path.join(get_package_share_directory('linorobot2_gazebo'),
+                         'worlds', world_file_name) 
+
     description_launch_path = PathJoinSubstitution(
         [FindPackageShare('linorobot2_description'), 'launch', 'description.launch.py']
     )
 
     return LaunchDescription([
         ExecuteProcess(
-            cmd=['gzserver', '--verbose', '-s', 'libgazebo_ros_factory.so',  '-s', 'libgazebo_ros_init.so', world_path],
+            cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so',  '-s', 'libgazebo_ros_init.so', world_path2],
             output='screen'
         ),
 
@@ -51,7 +57,7 @@ def generate_launch_description():
             executable='spawn_entity.py',
             name='urdf_spawner',
             output='screen',
-            arguments=["-topic", "robot_description", "-entity", "linorobot2"]
+            arguments=["-topic", "robot_description", "-entity", "linorobot2", "-y", "-1.7", "-x", "0.3"]
         ),
 
         Node(

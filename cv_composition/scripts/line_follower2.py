@@ -19,7 +19,7 @@ from geometry_msgs.msg import Twist
 rclpy.init()
 
 bridge = cv_bridge.CvBridge()
-cv2.namedWindow("window", 1)
+#cv2.namedWindow("window", 1)
 
 
 node = Node('follower')
@@ -53,8 +53,8 @@ def image_callback( msg):
             twist.linear.x = 0.1
             twist.angular.z = -float(err) / 150
             publisher.publish(twist)
-    cv2.imshow("window", image)
-    cv2.waitKey(3)
+    #cv2.imshow("window", image)
+    #cv2.waitKey(3)
 
 
 subscription = node.create_subscription(Image, 'camera/color/image_raw',

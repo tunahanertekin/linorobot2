@@ -57,7 +57,7 @@ def image_callback( msg):
     #cv2.waitKey(3)
 
 
-subscription = node.create_subscription(Image, 'camera/color/image_raw',
+subscription = node.create_subscription(Image, 'image',
                                         image_callback,
                                         rclpy.qos.qos_profile_sensor_data)
 

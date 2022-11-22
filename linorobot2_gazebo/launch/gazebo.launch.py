@@ -32,27 +32,27 @@ def generate_launch_description():
         [FindPackageShare("linorobot2_base"), "config", "ekf.yaml"]
     )
 
-    world_path = PathJoinSubstitution(
-        [FindPackageShare("linorobot2_gazebo"), "worlds", "playground.world"]
-    )
+    # world_path = PathJoinSubstitution(
+    #     [FindPackageShare("linorobot2_gazebo"), "worlds", "playground.world"]
+    # )
 
     description_launch_path = PathJoinSubstitution(
         [FindPackageShare('linorobot2_description'), 'launch', 'description.launch.py']
     )
 
     return LaunchDescription([
-        ExecuteProcess(
-            cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so',  '-s', 'libgazebo_ros_init.so', world_path],
-            output='screen'
-        ),
+        # ExecuteProcess(
+        #     cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so',  '-s', 'libgazebo_ros_init.so', world_path],
+        #     output='screen'
+        # ),
 
-        Node(
-            package='gazebo_ros',
-            executable='spawn_entity.py',
-            name='urdf_spawner',
-            output='screen',
-            arguments=["-topic", "robot_description", "-entity", "linorobot2"]
-        ),
+        # Node(
+        #     package='gazebo_ros',
+        #     executable='spawn_entity.py',
+        #     name='urdf_spawner',
+        #     output='screen',
+        #     arguments=["-topic", "robot_description", "-entity", "linorobot2"]
+        # ),
 
         Node(
             package='robot_localization',
